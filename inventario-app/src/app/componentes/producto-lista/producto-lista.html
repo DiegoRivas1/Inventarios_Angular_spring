@@ -3,6 +3,21 @@
   <a routerLink="/productos/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
 </div>
 
+
+<select (change)="cambiarLocale($any($event.target).value)">
+
+  @for (loc of locales; track loc.codigo) {
+    <option
+      [value]="loc.codigo"
+      [selected]="loc.codigo === localeActual()"
+    >
+      {{ loc.pais }} ({{ loc.moneda }})
+    </option>
+  }
+
+</select>
+
+
 <table class="table table-bordered table-hover">
   <thead class="table-dark">
     <tr>
@@ -21,7 +36,7 @@
       <tr>
         <td>{{ producto.idProducto }}</td>
         <td>{{ producto.descripcion }}</td>
-        <td>{{ producto.precio | currency: 'PEN':'symbol':'1.2-2' }}</td>
+        <td>{{ precioConvertido(producto.precio) | dynamicCurrency }}</td> <!-- <td>{{ producto.precio | currency: 'PEN':'symbol':'1.2-2' }}</td> -->
         <td>{{ producto.existencia }}</td>
         <td>
           <a [routerLink]="['/productos/editar', producto.idProducto]" 
