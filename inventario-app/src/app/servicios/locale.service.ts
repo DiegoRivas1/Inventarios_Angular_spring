@@ -37,9 +37,10 @@ export class LocaleService {
     return loc?.moneda?? 'PEN';
   });
 
-  convertirMoneda(valor: number): number {
-    const monedaActual = this.moneda();
-    const tasa = this.tasasCambio[monedaActual] ?? 1;
+
+  convertirMoneda(valor: number) {
+    const monedaDestino = this.moneda();
+    const tasa = this.tasasCambio[monedaDestino] ?? 1;
     return valor * tasa;
   }
 

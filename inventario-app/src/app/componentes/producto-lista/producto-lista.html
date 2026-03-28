@@ -1,53 +1,54 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Lista de Productos</h2>
-  <a routerLink="/productos/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
+<div class="lista-header">
+  <h2 class="lista-titulo">🏷️ Inventario de Productos</h2>
+  <a routerLink="/productos/nuevo" class="btn-nuevo">
+    ＋ Nuevo Producto
+  </a>
 </div>
 
-
-<select (change)="cambiarLocale($any($event.target).value)">
-
+<select class="selector-moneda" (change)="cambiarLocale($any($event.target).value)">
   @for (loc of locales; track loc.codigo) {
-    <option
-      [value]="loc.codigo"
-      [selected]="loc.codigo === localeActual()"
-    >
+    <option [value]="loc.codigo" [selected]="loc.codigo === localeActual()">
       {{ loc.pais }} ({{ loc.moneda }})
     </option>
   }
-
 </select>
 
-
-<table class="table table-bordered table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>Descripción</th>
-      <th>Precio</th>
-      <th>Existencia</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="5">Total productos: {{ productos().length }}</td>
-    </tr>
-    @for (producto of productos(); track producto.idProducto) {
+<div class="tabla-container">
+  <table class="tabla-productos">
+    <thead>
       <tr>
-        <td>{{ producto.idProducto }}</td>
-        <td>{{ producto.descripcion }}</td>
-        <td>{{ precioConvertido(producto.precio) | dynamicCurrency }}</td> <!-- <td>{{ producto.precio | currency: 'PEN':'symbol':'1.2-2' }}</td> -->
-        <td>{{ producto.existencia }}</td>
-        <td>
-          <a [routerLink]="['/productos/editar', producto.idProducto]" 
-             class="btn btn-warning btn-sm me-2">Editar</a>
-          <button (click)="eliminarProducto(producto.idProducto!)" 
-                  class="btn btn-danger btn-sm">Eliminar</button>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Existencia</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (producto of productos(); track producto.idProducto) {
+        <tr>
+          <td class="td-id">{{ producto.idProducto }}</td>
+          <td>{{ producto.descripcion }}</td>
+          <td class="td-precio">{{ precioConvertido(producto.precio) | dynamicCurrency }}</td> <!-- <td>{{ producto.precio | currency: 'PEN':'symbol':'1.2-2' }}</td> -->
+          <td>
+            <span class="badge-existencia">{{ producto.existencia }}</span>
+          </td>
+          <td class="td-acciones">
+            <a [routerLink]="['/productos/editar', producto.idProducto]" class="btn-editar">✏️</a>
+            <button (click)="eliminarProducto(producto.idProducto!)" class="btn-eliminar">🗑️</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="tabla-footer">
+          Total de productos: <strong>{{ productos().length }}</strong>
         </td>
       </tr>
-    }
-  </tbody>
-</table>
+    </tfoot>
+  </table>
+</div>
 
 
 <!-- 

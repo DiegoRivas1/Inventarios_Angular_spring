@@ -58,8 +58,12 @@ export class ProductoLista implements OnInit {
     //location.reload(); // necesario para que Angular actualice pipes
   }
 
+  /*
   precioConvertido(precio: number): number {
     return this.localeService.convertirMoneda(precio);
   }
+  */
+ //bind hace que siga siedo localService pero con el contexto de producto-lista, es decir, se puede usar como una función normal sin perder el contexto de localeService
+  precioConvertido = this.localeService.convertirMoneda.bind(this.localeService); //Otra forma de usar la función de conversión sin necesidad de crear un método adicional, localeService.convertirMoneda(producto.precio)
 }
   
