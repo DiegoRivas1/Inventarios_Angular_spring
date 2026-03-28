@@ -17,18 +17,20 @@
     <tr>
       <td colspan="5">Total productos: {{ productos().length }}</td>
     </tr>
-    <tr *ngFor="let producto of productos()">
-      <td>{{ producto.idProducto }}</td>
-      <td>{{ producto.descripcion }}</td>
-      <td>{{ producto.precio | currency }}</td>
-      <td>{{ producto.existencia }}</td>
-      <td>
-        <a [routerLink]="['/productos/editar', producto.idProducto]" 
-           class="btn btn-warning btn-sm me-2">Editar</a>
-        <button (click)="eliminarProducto(producto.idProducto!)" 
-                class="btn btn-danger btn-sm">Eliminar</button>
-      </td>
-    </tr>
+    @for (producto of productos(); track producto.idProducto) {
+      <tr>
+        <td>{{ producto.idProducto }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>{{ producto.precio | currency: 'PEN':'symbol':'1.2-2' }}</td>
+        <td>{{ producto.existencia }}</td>
+        <td>
+          <a [routerLink]="['/productos/editar', producto.idProducto]" 
+             class="btn btn-warning btn-sm me-2">Editar</a>
+          <button (click)="eliminarProducto(producto.idProducto!)" 
+                  class="btn btn-danger btn-sm">Eliminar</button>
+        </td>
+      </tr>
+    }
   </tbody>
 </table>
 
@@ -50,7 +52,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (producto of productos; track producto.idProducto) {
+    @for (producto of productos(); track producto.idProducto) {
       <tr>
         <td>{{ producto.idProducto }}</td>
         <td>{{ producto.descripcion }}</td>
@@ -88,7 +90,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let producto of productos">
+    <tr *ngFor="let producto of productos()">
       <td>{{ producto.idProducto }}</td>
       <td>{{ producto.descripcion }}</td>
       <td>{{ producto.precio | currency }}</td>
