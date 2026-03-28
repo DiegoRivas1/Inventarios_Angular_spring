@@ -1,3 +1,107 @@
-<app-producto-lista>
-    
-</app-producto-lista>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Lista de Productos</h2>
+  <a routerLink="/productos/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Existencia</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="5">Total productos: {{ productos().length }}</td>
+    </tr>
+    <tr *ngFor="let producto of productos()">
+      <td>{{ producto.idProducto }}</td>
+      <td>{{ producto.descripcion }}</td>
+      <td>{{ producto.precio | currency }}</td>
+      <td>{{ producto.existencia }}</td>
+      <td>
+        <a [routerLink]="['/productos/editar', producto.idProducto]" 
+           class="btn btn-warning btn-sm me-2">Editar</a>
+        <button (click)="eliminarProducto(producto.idProducto!)" 
+                class="btn btn-danger btn-sm">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- 
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Lista de Productos</h2>
+  <a routerLink="/productos/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Existencia</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (producto of productos; track producto.idProducto) {
+      <tr>
+        <td>{{ producto.idProducto }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>{{ producto.precio | currency }}</td>
+        <td>{{ producto.existencia }}</td>
+        <td>
+          <a [routerLink]="['/productos/editar', producto.idProducto]" 
+             class="btn btn-warning btn-sm me-2">Editar</a>
+          <button (click)="eliminarProducto(producto.idProducto!)" 
+                  class="btn btn-danger btn-sm">Eliminar</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+
+--------------
+
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Lista de Productos</h2>
+  <a routerLink="/productos/nuevo" class="btn btn-primary">+ Nuevo Producto</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Existencia</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productos">
+      <td>{{ producto.idProducto }}</td>
+      <td>{{ producto.descripcion }}</td>
+      <td>{{ producto.precio | currency }}</td>
+      <td>{{ producto.existencia }}</td>
+      <td>
+        <a [routerLink]="['/productos/editar', producto.idProducto]" 
+           class="btn btn-warning btn-sm me-2">Editar</a>
+        <button (click)="eliminarProducto(producto.idProducto!)" 
+                class="btn btn-danger btn-sm">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+-->

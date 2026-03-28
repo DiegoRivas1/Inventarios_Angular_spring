@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from '../modelos/producto';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductoService {
 
-  private apiURL = 'http://localhost:8080/api/productos';
-
-  constructor(private http: HttpClient){}
+  //private apiURL = 'http://localhost:8080/api/productos';
+  private apiURL = `${environment.apiUrl}/productos`; //readonly solo se aasigna una vez y no se puede modificar
+  private http = inject(HttpClient);
+  
+  //constructor(private readonly http: HttpClient){}
 
   getProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiURL);
