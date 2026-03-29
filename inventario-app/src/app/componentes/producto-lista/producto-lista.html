@@ -35,10 +35,8 @@
           </td>
           <td class="td-acciones">
             <a [routerLink]="['/productos/editar', producto.idProducto]" class="btn-editar">✏️</a>
-            <!-- <button (click)="eliminarProducto(producto.idProducto!)" class="btn-eliminar">🗑️</button> -->
-            <button (click)="eliminarProducto(producto.idProducto!)" class="btn-eliminar">🗑️</button>
-
-            
+            <button (click)="confirmarEliminar(producto.idProducto!)" class="btn-eliminar">🗑️</button>
+            <!-- <button (click)="eliminarProducto(producto.idProducto!)" class="btn-eliminar">🗑️</button> -->    
           </td>
         </tr>
       }
@@ -53,7 +51,19 @@
   </table>
 </div>
 
-
+@if (productoAEliminar() !== null) {
+              <div class="modal-overlay" (click)="cancelarEliminar()">
+                <div class="modal-confirm" (click)="$event.stopPropagation()">
+                  <div class="modal-icon">🗑️</div>
+                  <h3 class="modal-titulo">¿Eliminar producto?</h3>
+                  <p class="modal-texto">Esta acción no se puede deshacer.</p>
+                  <div class="modal-actions">
+                    <button class="btn-cancelar" (click)="cancelarEliminar()">✕ Cancelar</button>
+                    <button class="btn-eliminar-confirm" (click)="ejecutarEliminar()">🗑️ Eliminar</button>
+                  </div>
+                </div>
+              </div>
+            }
 <!-- 
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h2>Lista de Productos</h2>

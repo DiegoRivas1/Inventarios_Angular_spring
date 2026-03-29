@@ -65,5 +65,27 @@ export class ProductoLista implements OnInit {
   */
  //bind hace que siga siedo localService pero con el contexto de producto-lista, es decir, se puede usar como una función normal sin perder el contexto de localeService
   precioConvertido = this.localeService.convertirMoneda.bind(this.localeService); //Otra forma de usar la función de conversión sin necesidad de crear un método adicional, localeService.convertirMoneda(producto.precio)
+
+
+  //Control de eliminacion con confirmación modal
+  productoAEliminar = signal<number | null>(null);
+
+  confirmarEliminar(id: number): void {
+    this.productoAEliminar.set(id);
+  }
+
+  ejecutarEliminar(): void {
+    const id = this.productoAEliminar();
+    if (id !== null) {
+      this.productoService.eliminarProducto(id).subscribe(() => {
+        this.productoAEliminar.set(null);
+        this.getProductos();
+      });
+    }
+  }
+
+  cancelarEliminar(): void {
+    this.productoAEliminar.set(null);
+  }
 }
   
