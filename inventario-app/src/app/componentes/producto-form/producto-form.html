@@ -18,7 +18,7 @@
         type="text"
         class="form-input"
         placeholder="Ej: Pantalón Rojo"
-        [value]="producto().descripcion"
+        [ngModel]="producto().descripcion"
         (input)="actualizarCampo('descripcion', $any($event.target).value)"
       />
     </div>
@@ -30,7 +30,7 @@
           type="number"
           class="form-input"
           placeholder="0.00"
-          [value]="producto().precio"
+          [ngModel]="producto().precio"
           (input)="actualizarCampo('precio', +$any($event.target).value)"
         />
       </div>
@@ -41,7 +41,7 @@
           type="number"
           class="form-input"
           placeholder="0"
-          [value]="producto().existencia"
+          [ngModel]="producto().existencia"
           (input)="actualizarCampo('existencia', +$any($event.target).value)"
         />
       </div>

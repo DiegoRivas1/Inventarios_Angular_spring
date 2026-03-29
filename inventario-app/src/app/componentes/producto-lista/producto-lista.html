@@ -35,7 +35,10 @@
           </td>
           <td class="td-acciones">
             <a [routerLink]="['/productos/editar', producto.idProducto]" class="btn-editar">✏️</a>
+            <!-- <button (click)="eliminarProducto(producto.idProducto!)" class="btn-eliminar">🗑️</button> -->
             <button (click)="eliminarProducto(producto.idProducto!)" class="btn-eliminar">🗑️</button>
+
+            
           </td>
         </tr>
       }
