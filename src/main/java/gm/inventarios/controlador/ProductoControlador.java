@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("inventario-app") //  http://localhost:8080/inventario-app
-@CrossOrigin(value = "http://localhost:4200") // Puerto por default de Angular
+@RequestMapping("${app.base-url}")
+@CrossOrigin(origins = "${app.cors.allowed-origins}")
+//@RequestMapping("inventario-app") //  http://localhost:8080/inventario-app
+//@CrossOrigin(value = "http://localhost:4200") // Puerto por default de Angular
 public class ProductoControlador {// Mnadar informacion al login de nuestra aplicacion
     private static final Logger logger = LoggerFactory.getLogger(ProductoControlador.class);
 
