@@ -1,0 +1,228 @@
+/* ===== BASE ===== */
+:host {
+  display: block;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* ===== CONTENEDOR ===== */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* ===== HEADER ===== */
+.form-header {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 2rem;
+  background: var(--gradient-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7C3AED, #F472B6, #7C3AED);
+  background-size: 200% 100%;
+  animation: borderRun 3s linear infinite;
+}
+
+.form-header::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(244,114,182,0.12), transparent 70%);
+  border-radius: 50%;
+  animation: orb 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.form-titulo {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0 0 0.3rem;
+  text-shadow: 0 0 20px rgba(124,58,237,0.4);
+}
+
+.form-subtitulo {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ===== CARD ===== */
+.form-card {
+  background: var(--gradient-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  transition: var(--transition-base);
+}
+
+.form-card:hover {
+  box-shadow: var(--shadow-xl), 0 0 40px rgba(124,58,237,0.1);
+  border-color: var(--border-hover);
+}
+
+/* ===== GRUPOS ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ===== LABEL ===== */
+.form-label {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== INPUT ===== */
+.form-input {
+  background: var(--surface-mid);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  transition: var(--transition-fast);
+  outline: none;
+  width: 100%;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:hover {
+  border-color: var(--primary-light);
+  background: var(--surface-card);
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  background: var(--surface-card);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* Quitar flechas en input number */
+.form-input[type="number"]::-webkit-inner-spin-button,
+.form-input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.3;
+}
+
+/* ===== ACCIONES ===== */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ===== BOTONES ===== */
+.btn-cancelar,
+.btn-guardar {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cancelar {
+  background: rgba(124,58,237,0.08);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.btn-cancelar:hover {
+  background: rgba(124,58,237,0.15);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.btn-guardar {
+  background: var(--gradient-main);
+  color: var(--white);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn-guardar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--gradient-shine);
+  transition: 0.5s;
+}
+
+.btn-guardar:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: var(--shadow-xl), var(--shadow-accent);
+}
+
+.btn-guardar:hover::before { left: 100%; }
+
+.btn-cancelar:active,
+.btn-guardar:active { transform: scale(0.97); }
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes orb {
+  0%   { transform: scale(1)   rotate(0deg);   opacity: 0.4; }
+  50%  { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+  100% { transform: scale(1)   rotate(360deg); opacity: 0.4; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  :host { padding: 1rem; }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-cancelar,
+  .btn-guardar {
+    width: 100%;
+    justify-content: center;
+  }
+}

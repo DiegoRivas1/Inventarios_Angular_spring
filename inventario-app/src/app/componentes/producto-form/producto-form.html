@@ -1,1 +1,64 @@
-<p>producto-form works!</p>
+<div class="form-container">
+
+  <div class="form-header">
+    <h2 class="form-titulo">{{ titulo() }}</h2>
+    <p class="form-subtitulo">
+      @if (esEdicion()) {
+        Modifica los datos del producto
+      } @else {
+        Completa los datos del nuevo producto
+      }
+    </p>
+  </div>
+
+  <div class="form-card">
+    <div class="form-group">
+      <label class="form-label">Descripción</label>
+      <input
+        type="text"
+        class="form-input"
+        placeholder="Ej: Pantalón Rojo"
+        [value]="producto().descripcion"
+        (input)="actualizarCampo('descripcion', $any($event.target).value)"
+      />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Precio</label>
+        <input
+          type="number"
+          class="form-input"
+          placeholder="0.00"
+          [value]="producto().precio"
+          (input)="actualizarCampo('precio', +$any($event.target).value)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Existencia</label>
+        <input
+          type="number"
+          class="form-input"
+          placeholder="0"
+          [value]="producto().existencia"
+          (input)="actualizarCampo('existencia', +$any($event.target).value)"
+        />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-cancelar" (click)="cancelar()">
+        ✕ Cancelar
+      </button>
+      <button class="btn-guardar" (click)="guardarProducto()">
+        @if (esEdicion()) {
+          💾 Actualizar
+        } @else {
+          ➕ Guardar
+        }
+      </button>
+    </div>
+  </div>
+
+</div>
